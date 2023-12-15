@@ -2,7 +2,6 @@ import { db } from "@/db"; // Import eq and desc
 import { eq, desc } from "drizzle-orm"
 import { posts } from "../schema/post";
 import { user } from "../schema/user";
-import { media } from "../schema/media";
 
 
 

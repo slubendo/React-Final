@@ -1,11 +1,13 @@
 import Profile from "./profile"
 import { redirect } from "next/navigation"
+import { cookies } from "next/headers";
 import FeedPost from "@/components/feed-post"
+import { userQuery } from "@/db/queries/user-query";
 
 export default async function ProfilePage() {
   // Hard coded user for now
   // TODO: get user id from cookie and query the database for the user
-  const user = {
+  const fakeUser = {
     id: "user-1",
     name: "John Doe",
     image: "https://www.gravatar.com/avatar/?d=mp",
@@ -14,17 +16,20 @@ export default async function ProfilePage() {
   const posts = [
     {
       id: "1",
-      user,
+      fakeUser,
       createdAt: "2021-09-01T12:00:00.000Z",
       content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     },
     {
       id: "2",
-      user,
+      fakeUser,
       createdAt: "2021-09-01T12:00:00.000Z",
       content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     },
   ]
+
+  const userId = cookies().get("user_id")?.value ?? "0"
+  let user = await userQuery(parseInt(userId))
 
   if (!user) {
     redirect("/login")
@@ -32,7 +37,7 @@ export default async function ProfilePage() {
 
   return (
     <>
-      <Profile user={user} />
+      <Profile user={fakeUser} />
       <div className="mt-7">
         <div className="w-full border-b mb-5">
           <div className="mb-2">Posts</div>

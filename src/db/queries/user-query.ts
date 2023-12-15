@@ -7,11 +7,8 @@ export async function userQuery(id: number) {
     try {
     const userInfo = await db.select({
         id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.avatar,
-        createdAt: user.createdAt,
+        name: user.name,
+        image: user.image,
     })
         .from(user)
         .where(eq(user.id, id))

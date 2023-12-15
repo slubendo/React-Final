@@ -9,7 +9,7 @@ import { posts } from "@/db/schema/post";
 import { user } from "@/db/schema/user";
 const saltRounds = 10;
 
-export async function createPost(id: number, userId: number, content: string) {
+export async function createPost(userId: number, content: string) {
   try {
 
 
@@ -21,10 +21,11 @@ export async function createPost(id: number, userId: number, content: string) {
 
     const postsResult = await db.insert(posts).values({ userId, content }).returning();
 
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    return { error: "user unable to log in" }
   }
-  revalidatePath("/")
+    console.log("Post successfully made")
+    redirect("/")
 }
 
 

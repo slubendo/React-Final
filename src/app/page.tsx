@@ -4,7 +4,7 @@ export default async function Home() {
   const posts = [
     {
       id: "1",
-      user: {
+      fakeUser: {
         id: "1",
         name: "John Doe",
         image: "https://www.gravatar.com/avatar/?d=mp",
@@ -14,7 +14,7 @@ export default async function Home() {
     },
     {
       id: "2",
-      user: {
+      fakeUser: {
         id: "1",
         name: "John Doe",
         image: "https://www.gravatar.com/avatar/?d=mp",
@@ -24,7 +24,7 @@ export default async function Home() {
     },
     {
       id: "2",
-      user: {
+      fakeUser: {
         id: "1",
         name: "John Doe",
         image: "https://www.gravatar.com/avatar/?d=mp",

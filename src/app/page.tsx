@@ -35,7 +35,7 @@ export default async function Home() {
     },
   ]
 
-  const feed = await feedQuery.execute()
+    const feed = await feedQuery.execute()
 
   return (
     <div className="grid grid-cols-2 gap-4">

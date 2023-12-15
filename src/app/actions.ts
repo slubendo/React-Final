@@ -25,6 +25,7 @@ export async function createPost(userId: number, content: string) {
     return { error: "user unable to log in" }
   }
     console.log("Post successfully made")
+    revalidatePath("/")
     redirect("/")
 }
 

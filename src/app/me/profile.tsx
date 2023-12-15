@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import { cookies } from "next/headers"
+import { redirect } from 'next/navigation'
 
 export default async function Profile({
   user,
@@ -10,6 +12,13 @@ export default async function Profile({
     image?: string | null
   }
 }) {
+
+function logOut() {
+  cookies().set("user_name", "");
+  cookies().set("user_name_id", "");
+  redirect("/")
+  }
+
   return (
     <div className="flex justify-between">
       <div>
@@ -26,6 +35,7 @@ export default async function Profile({
             priority={true}
             fill={true}
           />
+          <button onClick={logOut}></button>
         </div>
       </Link>
     </div>

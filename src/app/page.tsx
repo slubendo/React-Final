@@ -1,4 +1,5 @@
 import FeedPost from "@/components/feed-post"
+import { feedQuery } from "@/db/queries/feed-query"
 
 export default async function Home() {
   const posts = [
@@ -33,6 +34,8 @@ export default async function Home() {
       content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     },
   ]
+
+  const feed = await feedQuery.execute()
 
   return (
     <div className="grid grid-cols-2 gap-4">

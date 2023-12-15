@@ -4,6 +4,8 @@ import Image from "next/image"
 import { useState } from "react"
 import { User } from "@/db/schema/user"
 import { createPost } from "../actions"
+import { redirect } from 'next/navigation'
+
 
 export default function CreatePostForm({user}: {user: User}) {
   const [content, setContent] = useState("")
@@ -11,7 +13,7 @@ export default function CreatePostForm({user}: {user: User}) {
   setMessage("Post");
 
 
-  const buttonDisabled = content.length <= 3 || status === "executing"
+  const buttonDisabled = content.length < 5 ||  content.length > 140 || status === "executing" 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -28,9 +30,11 @@ export default function CreatePostForm({user}: {user: User}) {
       alert(postMade.error || "Something went wrong");
     }
     console.log("post", name)
+    redirect("/")
   }
-  setMessage("Post");
 
+
+  setMessage("Post");
   return (
     <form className="border border-neutral-500 rounded-lg px-6 py-4" onSubmit={handleSubmit}>
       <div className="flex gap-4 items-start pb-4">

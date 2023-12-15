@@ -2,20 +2,18 @@ import { db } from "@/db"; // Import eq and desc
 import { eq, desc } from "drizzle-orm"
 import { posts } from "../schema/post";
 import { user } from "../schema/user";
-import { media } from "../schema/media";
 import { feedQuery } from "./feed-query";
 
 
-export async function getSinglePost(id: number) {
+export async function userFeed(id: number) {
     try {
-        const singlePost = await feedQuery
-            .where(eq(posts.id, id))
-            .then((res) => res[0]);
+        const usrPosts = await feedQuery
+            .where(eq(user.id, id))
 
-        if (singlePost) {
+        if (usrPosts) {
             return {
                 "success": "single post",
-                "post": singlePost
+                usrPosts: usrPosts
             }
         } else {
             return { "error": "cannot find post" }

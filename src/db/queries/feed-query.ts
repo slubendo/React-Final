@@ -7,30 +7,16 @@ import { user } from "../schema/user";
 
 export const feedQuery = db.select({
   id: posts.id,
-  userId: posts.userId,
-  mediaId: posts.mediaId,
   content: posts.content,
   createdAt: posts.createdAt,
   user: {
     id: user.id,
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    avatar: user.avatar,
-    createdAt: user.createdAt,
+    name: user.name,
+    image: user.image,
   },
-  media: {
-    id: media.id,
-    type: media.type,
-    url: media.url,
-    width: media.width,
-    height: media.height,
-    createdAt: media.createdAt,
-  }
 })
   .from(posts)
   .innerJoin(user, eq(posts.userId, user.id))
-  .innerJoin(media, eq(posts.mediaId, media.id))
   .orderBy(desc(posts.createdAt))
 
 

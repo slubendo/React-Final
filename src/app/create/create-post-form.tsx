@@ -23,11 +23,16 @@ export default function CreatePostForm({user}: {user: User}) {
     }
     setMessage("Loading...");
 
-    const postMade = await createPost(user.id, content)
-    if (!postMade.error) {
-      setMessage("Logged in!");
-    } else {
-      alert(postMade.error || "Something went wrong");
+    try {
+      const postMade = await createPost(user.id, content)
+      if (!postMade.error) {
+        setMessage("Logged in!");
+      } else {
+        alert(postMade.error || "Something went wrong");
+      }
+      
+    } catch (error) {
+      console.log("Error: " + error)
     }
     console.log("post", name)
     redirect("/")

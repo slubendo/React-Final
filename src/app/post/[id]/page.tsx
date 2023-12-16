@@ -18,11 +18,16 @@ export default async function Post({ params }: { params: { id: string } }) {
     content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
   }
   
-  let post = await postQuery(parseInt(params.id))
+  try{
+    let post = await postQuery(parseInt(params.id))
 
-  if (!post) {
-    notFound()
+    if (!post) {
+      notFound()
+    }
+  } catch (err) {
+    return { "error": "Error loading feed" }
   }
+
 
 
   return (

@@ -14,17 +14,24 @@ export default function LoginForm() {
     e.preventDefault()
     setMessage("Logging in...");
 
-    const loggedIn =  await login(name)
 
-    if(loggedIn.success){
-      setMessage("Logged in!");
-       redirect(`/`)
-    } else {
-      setMessage(loggedIn.failure || "Something went wrong");
+    try {
+      const loggedIn = await login(name)
+
+      if (loggedIn.success) {
+        setMessage("Logged in!");
+        redirect(`/`)
+      } else {
+        setMessage(loggedIn.failure || "Something went wrong");
+      }
+
+    } catch (err) {
+      return { "error": "Error loading feed" }
     }
-    console.log("login", name)
-    setMessage("Logged in...");
 
+    
+    console.log("login", name)
+    setMessage("Logged in!");
   }
 
   setMessage("Sign in in");

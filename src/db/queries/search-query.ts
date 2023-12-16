@@ -5,20 +5,23 @@ import { user } from "../schema/user";
 
 
 export async function searchQuery(searchParams: string) {
+  try {
 
- const search = db.select({
-  id: posts.id,
-  content: posts.content,
-  createdAt: posts.createdAt,
-  user: {
-    id: user.id,
-    name: user.name,
-    image: user.image,
-  },
-})
-  .from(posts)
-  .where(like(posts.content, `%${searchParams}%`))
-  .innerJoin(user, eq(posts.userId, user.id))
-  .orderBy(desc(posts.createdAt))
-
+    const search = await db.select({
+      id: posts.id,
+      content: posts.content,
+      createdAt: posts.createdAt,
+      user: {
+        id: user.id,
+        name: user.name,
+        image: user.image,
+      },
+    })
+      .from(posts)
+      .where(like(posts.content, `%${searchParams}%`))
+      .innerJoin(user, eq(posts.userId, user.id))
+      .orderBy(desc(posts.createdAt))
+  } catch (err) {
+    return { "error": "cannot find post" }
+  }
 }

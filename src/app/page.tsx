@@ -34,8 +34,11 @@ export default async function Home() {
       content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     },
   ]
-
+  try{
     const feed = await feedQuery.execute()
+  } catch (err) {
+    return { "error": "Error loading feed" }
+  }
 
   return (
     <div className="grid grid-cols-2 gap-4">

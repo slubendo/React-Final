@@ -1,13 +1,12 @@
 'use server'
 
 import { db } from "@/db";
-import { eq, and } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { redirect } from 'next/navigation'
 import { cookies } from "next/headers"
 import { posts } from "@/db/schema/post";
 import { user } from "@/db/schema/user";
-const saltRounds = 10;
 
 export async function createPost(userId: number, content: string) {
   try {
@@ -32,6 +31,7 @@ export async function createPost(userId: number, content: string) {
 
 export async function createUser(name: string, image: string) {
 
+  try {
 
   const userAlreadyInDB = await db.select()
     .from(user)
@@ -59,6 +59,9 @@ export async function createUser(name: string, image: string) {
     success: "Signed up user successfully",
     user: signedUser
   }
+} catch (err) {
+  return { "failure": "Unable to sign up user" }
+}
 }
 
 export async function login(name: string) {
@@ -76,7 +79,7 @@ export async function login(name: string) {
 
       return { "success": "user log in" }
     } else {
-      throw new Error("Unable to log in")
+      return{ "failure": "user unable to log in" }
     }
   } catch (err) {
     return { "failure": "user unable to log in" }

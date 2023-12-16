@@ -28,11 +28,15 @@ export default async function ProfilePage() {
     },
   ]
 
-  const userId = cookies().get("user_id")?.value ?? "0"
-  let user = await userQuery(parseInt(userId))
-
-  if (!user) {
-    redirect("/login")
+  try{
+    const userId = cookies().get("user_id")?.value ?? "0"
+    let user = await userQuery(parseInt(userId))
+    
+    if (!user) {
+      redirect("/login")
+    }
+  } catch (err) {
+    return { "error": "Error loading feed" }
   }
 
   return (

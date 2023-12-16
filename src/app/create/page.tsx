@@ -6,12 +6,18 @@ import { redirect } from "next/navigation"
 
 export default async function Create() {
 
-  const userId = cookies().get("user_id")?.value ?? "0"
-  let user = await userQuery(parseInt(userId))
-
-  if (!user) {
-    redirect("/login")
+  try{
+    const userId = cookies().get("user_id")?.value ?? "0"
+    let user = await userQuery(parseInt(userId))
+  
+    if (!user) {
+      redirect("/login")
+    }
+    
+  } catch (err) {
+    return { "error": "Error loading feed" }
   }
+
 
   const fakeUser = {
     id: 1,

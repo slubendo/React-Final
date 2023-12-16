@@ -21,3 +21,4 @@ export async function postQuery(id: number) {
         return { "error": "cannot find post" }
     }
 }
+

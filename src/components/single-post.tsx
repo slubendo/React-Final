@@ -1,20 +1,20 @@
 import Image from "next/image"
 import Link from "next/link"
-
 import timeAgoShort from "@/utils/timeAgoShort"
+import { Post } from "@/db/schema/post"
 
 export default function SinglePost({
   post,
 }: {
-  post: {
+  post:  {
+    id: number;
+    content: string;
+    createdAt: string;
     user: {
-      id: string
-      name: string
-      image: string
-    }
-    id: string
-    createdAt: string
-    content: string
+        id: number;
+        image: string;
+        name: string;
+    };
   }
 }) {
   return (

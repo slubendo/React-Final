@@ -5,5 +5,4 @@ const client = createClient({ url: process.env.DATABASE_URL!, authToken: process
 
 export const db = drizzle(client);
 
-// const result = await db.select().from(users).all()
 

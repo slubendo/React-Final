@@ -2,15 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { cookies } from "next/headers"
 import { redirect } from 'next/navigation'
+import { User } from "@/db/schema/user"
 
 export default async function Profile({
   user,
 }: {
-  user: {
-    name?: string | null
-    username?: string | null
-    image?: string | null
-  }
+  user: User
 }) {
 
 function logOut() {
@@ -23,7 +20,7 @@ function logOut() {
     <div className="flex justify-between">
       <div>
         <h2 className="text-3xl font-semibold">{user.name}</h2>
-        <div>{user.username}</div>
+        <div>{user.name}</div>
       </div>
       <Link href={user.image || "https://www.gravatar.com/avatar/?d=mp"}>
         <div className="rounded-full h-20 w-20 overflow-hidden relative">
